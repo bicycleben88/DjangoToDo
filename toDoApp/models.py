@@ -8,3 +8,10 @@ class Dog(models.Model):
 
     class Meta: 
         verbose_name_plural = 'dogs'
+
+class ToDo(models.Model):
+    
+    item = models.CharField(max_length=500)
+
+    class Meta: 
+        verbose_name_plural = 'todos'

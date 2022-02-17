@@ -20,6 +20,7 @@ from toDoApp import views
 
 router = routers.DefaultRouter()
 router.register(r'dogs', views.DogViewSet)
+router.register(r'todos', views.ToDoViewSet)
 router.register(r'users', views.UserViewSet)
 router.register(r'groups', views.GroupViewSet)
 
