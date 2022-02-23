@@ -1,17 +1,12 @@
-from tabnanny import verbose
 from django.db import models
+from django.contrib.auth import get_user_model # If used custom user model
 
-class Dog(models.Model):
-
-    name = models.CharField(max_length=100)
-    age = models.IntegerField()
-
-    class Meta: 
-        verbose_name_plural = 'dogs'
+UserModel = get_user_model()
 
 class ToDo(models.Model):
     
     item = models.CharField(max_length=500)
+    user = models.ForeignKey(UserModel, on_delete= models.CASCADE, related_name="todos")
 
     class Meta: 
         verbose_name_plural = 'todos'
