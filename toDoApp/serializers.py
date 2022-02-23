@@ -24,13 +24,6 @@ class UserSerializer(serializers.ModelSerializer):
         # Tuple of serialized model fields (see link [2])
         fields = ( "id", "username", "password", )
 
-class DogSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Dog
-        fields = ['name', 'age']
-
-
-
 class GroupSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Group
