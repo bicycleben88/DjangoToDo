@@ -5,6 +5,7 @@ from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 from rest_framework import permissions
 from .serializers import DogSerializer, ToDoSerializer, UserSerializer, GroupSerializer
+from rest_framework_simplejwt import authentication
 
 class DogViewSet(viewsets.ModelViewSet):
     queryset = Dog.objects.all()
@@ -24,4 +25,5 @@ class GroupViewSet(viewsets.ModelViewSet):
 class ToDoViewSet(viewsets.ModelViewSet):
     queryset = ToDo.objects.all()
     serializer_class = ToDoSerializer
-    permission_class = [permissions.AllowAny]
+    permission_classes = [permissions.IsAuthenticated]
+    authentication_classes = (authentication.JWTAuthentication,)
