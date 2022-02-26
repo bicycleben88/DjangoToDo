@@ -2,7 +2,9 @@ from .models import  ToDo
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 from rest_framework import permissions
-from .serializers import ToDoSerializer, UserSerializer, GroupSerializer
+from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework.permissions import AllowAny
+from .serializers import ToDoSerializer, UserSerializer, GroupSerializer, MyTokenObtainPairSerializer
 from rest_framework_simplejwt import authentication
  
 class UserViewSet(viewsets.ModelViewSet):
@@ -20,3 +22,7 @@ class ToDoViewSet(viewsets.ModelViewSet):
     serializer_class = ToDoSerializer
     permission_classes = [permissions.IsAuthenticated]
     authentication_classes = (authentication.JWTAuthentication,)
+
+class MyObtainTokenPairView(TokenObtainPairView):
+    permission_classes = (AllowAny,)
+    serializer_class = MyTokenObtainPairSerializer
