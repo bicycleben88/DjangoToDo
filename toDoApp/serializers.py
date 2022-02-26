@@ -9,18 +9,10 @@ UserModel = get_user_model()
 
 
 class ToDoSerializer(serializers.ModelSerializer):
-    # def create(self, validated_data):
-    #     print(validated_data)
-
-    #     ToDo = ToDo.objects.create_ToDo(
-    #         item=validated_data['item']
-    #     )
-
-    #     return ToDo
 
     class Meta: 
         model = ToDo
-        fields = ['item', 'user']
+        fields = ['item', 'user', 'id']
 
         
 class UserSerializer(serializers.ModelSerializer):
@@ -38,6 +30,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = UserModel
+        depth = 1
         # Tuple of serialized model fields (see link [2])
         fields = ( "id", "username", "password", "todos")
 
@@ -47,14 +40,11 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
         fields = ['url', 'name']
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
-    print('token token token')
+  
     @classmethod
     def get_token(cls, user):
         token = super(MyTokenObtainPairSerializer, cls).get_token(user)
-        print('get token get token')
-        print(user)
-        # Add custom claims
+       
         token['username'] = user.username
-        token['id'] = user.id
 
         return token
